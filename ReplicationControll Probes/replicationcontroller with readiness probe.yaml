@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+   name: mydeployment
+  selector:
+    matchLabels:
+      env: dev
+  template:
+       metadata:
+          labels:
+              env: dev
+       spec:
+            containers:
+                 - name: nginxcontaine
+                   image: nginx
+                   ports:
+                     - containerPort: 80
+                   livenessProbe:
+                      httpGet:
+                          path: /index.html
+                          port: 80
+                      initialDelaySeconds: 10
+                      periodSeconds: 5
+                      failureThreshold: 3
+                   readinessProbe:
+                      httpGet:
+                           path: /index.html
+                           port: 80
+                      initialDelaySeconds: 10
+                      periodSeconds: 5
+                      failureThreshold: 3

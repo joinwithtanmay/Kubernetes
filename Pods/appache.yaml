@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: appachepod
+  labels:
+    app: appachelabel
+spec:
+  containers:
+    - name: appachecont
+      image: httpd
+      ports:
